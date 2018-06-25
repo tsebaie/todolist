@@ -1,0 +1,40 @@
+<label for="inputText" >Input task in here: </label>
+<!-- how we get our data from the inputs:
+  we create our textbox and then we bind and event similar to javascript
+  like (blur) and then we bind it to the function/method we call assignTask()
+
+  the $event input parameter is an angular value that will pass all our input data
+  as a parameter to the method we recieved eg. "dancing" or "clubbing"
+
+  different methods that we have are (click), (change), (blur), (mouseover) etc.
+-->
+<input type="text" (blur)="assignTask($event)"><br>
+
+<label for="">Time in here</label> 
+<input type="time" (blur)="assignTime($event)" value="00:00"><br>
+
+<button (click)="insertListItems()">Insert data to the list</button>
+
+<h1>Task List: </h1> <br>
+
+<!--Displaying data with direcitives
+in this scenario we make use of the *ngfor="" directive, which works much like a foreach
+loop and will accept parameter like "let temporaryVariable of ourArray" basically:
+we are making a temporary variable that will change upon every iteration from our
+listArray
+
+the second parameter which is "let i = index" will give us our current array index eg. 0,1,2,3,4,5 etc.
+-->
+<ul *ngFor="let listitemss of listArray; let i = index">
+
+  <!--NOTE: that the below li items will be created upon every interation of the size of the array-->
+
+  <!--these {{ }} will take any variable given to it in this case our array items below and are:
+  listitems.task(which is our Task object property)
+  listitems.time(which is our Task object propoerty)-->
+  <li>Task {{ i+1 }}: {{ listitemss.task }} at: {{ listitemss.time }} 
+    
+    <button (click)="deleteElement(i)">Delete task</button> <button (click)="updateElement(i)">Update task</button>
+    <!--It makes two buttons with methods up here-->
+  </li>
+</ul>
